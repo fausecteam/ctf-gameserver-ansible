@@ -1,0 +1,116 @@
+#jinja2: lstrip_blocks: True
+# {{ ansible_managed }}
+
+"""
+Django and project specific settings for usage in production.
+Edit this file and adjust the options to your own requirements! You may also set additional options from
+https://docs.djangoproject.com/en/1.8/ref/settings/.
+"""
+
+from ctf_gameserver.web.base_settings import *
+
+
+# The human-readable title of your CTF
+COMPETITION_NAME = '{{ ctf_gameserver_competition_name }}'
+
+# Content Security Policy header in the format `directive: [values]`, see e.g
+# http://www.html5rocks.com/en/tutorials/security/content-security-policy/ for an explanation
+# The initially selected directives should cover most sensitive cases, but still allow YouTube embeds,
+# webfonts etc.
+CSP_POLICIES = {
+    {% for key, values in ctf_gameserver_web_csp_policies.items() %}
+    '{{ key }}': [{% for val in values %}"{{ val }}",{% endfor %}],
+    {% endfor %}
+}
+
+# Set to True if your site is available exclusively through HTTPS and not via plaintext HTTP
+HTTPS = {% if ctf_gameserver_web_https %}True{% else %}False{% endif %}
+
+
+# Your database settings
+# See https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': '{{ ctf_gameserver_db_host }}',
+        'PORT': '{{ ctf_gameserver_db_port }}',
+        'NAME': '{{ ctf_gameserver_db_name }}',
+        'USER': '{{ ctf_gameserver_web_db_user }}',
+        'PASSWORD': '{{ ctf_gameserver_web_db_pass }}',
+        'CONN_MAX_AGE': 60
+    }
+}
+
+# Your cache configuration
+# See https://docs.djangoproject.com/en/1.8/topics/cache/#setting-up-the-cache
+CACHES = {
+    'default': {
+        'BACKEND': '{{ ctf_gameserver_web_cache_backend }}',
+        'LOCATION': '{{ ctf_gameserver_web_cache_location }}',
+        'TIMEOUT': {{ ctf_gameserver_web_cache_timeout }}
+    }
+}
+
+# Settings for the SMTP server that will be used to send email messages
+# See https://docs.djangoproject.com/en/1.8/ref/settings/#email-host and other options
+EMAIL_HOST = '{{ ctf_gameserver_web_email_host }}'
+EMAIL_PORT = {{ ctf_gameserver_web_email_port }}
+EMAIL_HOST_USER = '{{ ctf_gameserver_web_email_user }}'
+EMAIL_HOST_PASSWORD = '{{ ctf_gameserver_web_email_pass }}'
+# See https://docs.djangoproject.com/en/1.8/ref/settings/#email-use-tls
+EMAIL_USE_TLS = {% if ctf_gameserver_web_email_use_tls %}True{% else %}False{% endif %}
+{# Newline required to prevent Jinja2's `trim_blocks` from merging the two lines #}
+
+EMAIL_USE_SSL = {% if ctf_gameserver_web_email_use_ssl %}True{% else %}False{% endif %}
+
+# Sender address for messages sent by the gameserver
+DEFAULT_FROM_EMAIL = '{{ ctf_gameserver_web_from_email }}'
+
+# Filesystem path where user-uploaded files are stored
+# This directory must be served by the web server under the path defined by MEDIA_URL in 'base_settings.py'
+# ("/uploads" by default)
+MEDIA_ROOT = '{{ ctf_gameserver_web_media_root }}'
+
+# The backend used to store user sessions
+SESSION_ENGINE = '{{ ctf_gameserver_web_session_engine }}'
+
+# A long, random string, which you are supposed to keep secret
+SECRET_KEY = '{{ ctf_gameserver_web_secret_key }}'
+
+# Insert all hostnames your site is available under
+# See https://docs.djangoproject.com/en/1.8/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = [{% for host in ctf_gameserver_web_allowed_hosts %}'{{ host }}',{% endfor %}]
+
+# The name of the time zone (i.e. something like "Europe/Berlin") in which dates should be displayed
+# See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for a list of valid options
+TIME_ZONE = '{{ ctf_gameserver_web_timezone }}'
+
+# First day of the week: 0 means Sunday, 1 means Monday and so on
+FIRST_DAY_OF_WEEK = {{ ctf_gameserver_web_first_day_of_week }}
+
+
+# You should not have to edit anything below this line
+
+# Set up logging to syslog
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'syslog': {
+            'class': 'logging.handlers.SysLogHandler',
+            'address': '/dev/log'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['syslog'],
+            'level': 'WARNING'
+        }
+    }
+}
+
+DEBUG = False
+
+if HTTPS:
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True

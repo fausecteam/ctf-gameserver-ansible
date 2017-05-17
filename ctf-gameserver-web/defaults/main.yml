@@ -1,0 +1,38 @@
+ctf_gameserver_version: "1.0"
+ctf_gameserver_competition_name: Default CTF
+
+ctf_gameserver_db_port: 5432
+ctf_gameserver_db_name: ctf_gameserver
+
+# Download & installation variables
+ctf_gameserver_web_package: python3-ctf-gameserver_{{ ctf_gameserver_version }}_all.deb
+ctf_gameserver_web_package_url: "{{ ctf_gameserver_downloadpath }}/{{ ctf_gameserver_web_package }}"
+ctf_gameserver_web_group: www-data
+
+# Django config variables
+ctf_gameserver_web_csp_policies:
+  script-src:
+    - "'self'"
+  style-src:
+    - "'self'"
+  object-src:
+    - "'self'"
+  connect-src:
+    - "'self'"
+ctf_gameserver_web_https: false
+ctf_gameserver_web_db_user: gameserver_web
+ctf_gameserver_web_cache_backend: django.core.cache.backends.dummy.DummyCache
+ctf_gameserver_web_cache_location: ""
+ctf_gameserver_web_cache_timeout: 60
+ctf_gameserver_web_email_host: localhost
+ctf_gameserver_web_email_port: 25
+ctf_gameserver_web_email_user: ""
+ctf_gameserver_web_email_pass: ""
+ctf_gameserver_web_email_use_tls: false
+ctf_gameserver_web_email_use_ssl: false
+ctf_gameserver_web_media_root: /var/www/gameserver_uploads
+ctf_gameserver_web_session_engine: django.contrib.sessions.backends.cached_db
+ctf_gameserver_web_allowed_hosts:
+  - "{{ ansible_fqdn }}"
+ctf_gameserver_web_timezone: UTC
+ctf_gameserver_web_first_day_of_week: 1

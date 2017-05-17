@@ -1,0 +1,20 @@
+- name: "Install CTF Gameserver web component"
+  apt:
+    state: present
+    deb: "{{ ctf_gameserver_web_package_url }}"
+
+- name: "Add config for CTF Gameserver web component"
+  template:
+    src: prod_settings.py.j2
+    dest: /etc/ctf-gameserver/web/prod_settings.py
+    owner: root
+    group: "{{ ctf_gameserver_web_group }}"
+    mode: 0640
+
+- name: "Create CTF Gameserver web uploads directory"
+  file:
+    path: "{{ ctf_gameserver_web_media_root }}"
+    state: directory
+    owner: root
+    group: "{{ ctf_gameserver_web_group }}"
+    mode: 0770

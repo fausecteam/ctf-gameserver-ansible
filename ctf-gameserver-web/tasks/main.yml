@@ -18,3 +18,50 @@
     owner: root
     group: "{{ ctf_gameserver_web_group }}"
     mode: 0770
+
+- name: "Initialize Django auth in database for CTF Gameserver"
+  command: django-admin migrate auth
+  environment:
+    PYTHONPATH: /etc/ctf-gameserver/web
+    DJANGO_SETTINGS_MODULE: prod_settings
+  register: migrate_auth_result
+  changed_when: "'No migrations to apply.' not in migrate_auth_result.stdout"
+
+- name: "Initialize database for CTF Gameserver"
+  command: django-admin migrate
+  environment:
+    PYTHONPATH: /etc/ctf-gameserver/web
+    DJANGO_SETTINGS_MODULE: prod_settings
+  register: migrate_result
+  changed_when: "'No migrations to apply.' not in migrate_result.stdout"
+
+- name: "Install pexpect (for Ansible)"
+  apt:
+    name: python-pexpect
+    state: present
+  when: not (ansible_distribution == 'Debian' and ansible_distribution_release == 'jessie')
+
+- name: "Install pexpect (for Ansible) from backports"
+  apt:
+    name: python-pexpect
+    default_release: jessie-backports
+    state: present
+  when: ansible_distribution == 'Debian' and ansible_distribution_release == 'jessie'
+
+- name: "Create admin account for CTF Gameserver web component"
+  expect:
+    command: django-admin createsuperuser --username {{ ctf_gameserver_web_admin_user }} --email {{ ctf_gameserver_web_admin_email }}
+    responses:
+      Password: "{{ ctf_gameserver_web_admin_pass }}"
+    timeout: 5
+    creates: /root/.ansible_ctf_gameserver_web_admin_createstamp
+  environment:
+    PYTHONPATH: /etc/ctf-gameserver/web
+    DJANGO_SETTINGS_MODULE: prod_settings
+  register: ctf_gameserver_web_create_admin
+
+- name: "Add admin account create stamp"
+  file:
+    path: /root/.ansible_ctf_gameserver_web_admin_createstamp
+    state: touch
+  when: ctf_gameserver_web_create_admin.changed

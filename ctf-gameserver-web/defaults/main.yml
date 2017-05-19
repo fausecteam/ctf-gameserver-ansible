@@ -8,6 +8,7 @@ ctf_gameserver_db_name: ctf_gameserver
 ctf_gameserver_web_package: python3-ctf-gameserver_{{ ctf_gameserver_version }}_all.deb
 ctf_gameserver_web_package_url: "{{ ctf_gameserver_downloadpath }}/{{ ctf_gameserver_web_package }}"
 ctf_gameserver_web_group: www-data
+ctf_gameserver_web_admin_user: admin
 
 # Django config variables
 ctf_gameserver_web_csp_policies:

@@ -1,0 +1,5 @@
+ctf_gameserver_db_name: ctf_gameserver
+ctf_gameserver_db_user_controller: gameserver_controller
+ctf_gameserver_db_user_web: gameserver_web
+ctf_gameserver_db_user_checker: gameserver_checker
+ctf_gameserver_db_user_submission: gameserver_submission

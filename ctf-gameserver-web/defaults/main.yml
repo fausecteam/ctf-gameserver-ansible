@@ -3,6 +3,7 @@ ctf_gameserver_competition_name: Default CTF
 
 ctf_gameserver_db_port: 5432
 ctf_gameserver_db_name: ctf_gameserver
+ctf_gameserver_db_user_web: gameserver_web
 
 # Download & installation variables
 ctf_gameserver_web_package: python3-ctf-gameserver_{{ ctf_gameserver_version }}_all.deb
@@ -21,7 +22,6 @@ ctf_gameserver_web_csp_policies:
   connect-src:
     - "'self'"
 ctf_gameserver_web_https: false
-ctf_gameserver_web_db_user: gameserver_web
 ctf_gameserver_web_cache_backend: django.core.cache.backends.dummy.DummyCache
 ctf_gameserver_web_cache_location: ""
 ctf_gameserver_web_cache_timeout: 60

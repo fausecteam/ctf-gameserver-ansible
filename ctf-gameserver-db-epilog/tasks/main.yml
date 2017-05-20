@@ -1,0 +1,16 @@
+- name: "Install psycopg2 (for Ansible)"
+  apt:
+    name: python-psycopg2
+    state: present
+
+- name: "Prevent web component database user from creating objects in the schema"
+  postgresql_privs:
+    database: "{{ ctf_gameserver_db_name }}"
+    type: schema
+    objs: public
+    roles: "{{ ctf_gameserver_db_user_web }}"
+    privs: CREATE
+    state: absent
+    login_unix_socket: /run/postgresql
+  become: true
+  become_user: postgres

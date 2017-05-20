@@ -1,7 +1,8 @@
 - name: "Install CTF Gameserver web component"
   apt:
     state: present
-    deb: "{{ ctf_gameserver_web_package_url }}"
+    deb: "{{ ctf_gameserver_downloadpath }}/{{ item }}"
+  with_items: "{{ ctf_gameserver_web_packages }}"
 
 - name: "Add config for CTF Gameserver web component"
   template:
@@ -19,7 +20,7 @@
     group: "{{ ctf_gameserver_web_group }}"
     mode: 0770
 
-- name: "Initialize Django auth in database for CTF Gameserver"
+- name: "Initialize Django auth in CTF Gameserver database"
   command: django-admin migrate auth
   environment:
     PYTHONPATH: /etc/ctf-gameserver/web
@@ -27,7 +28,7 @@
   register: migrate_auth_result
   changed_when: "'No migrations to apply.' not in migrate_auth_result.stdout"
 
-- name: "Initialize database for CTF Gameserver"
+- name: "Initialize CTF Gameserver database"
   command: django-admin migrate
   environment:
     PYTHONPATH: /etc/ctf-gameserver/web

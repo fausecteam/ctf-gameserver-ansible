@@ -1,0 +1,18 @@
+# {{ ansible_managed }}
+
+--gamedbhost {{ ctf_gameserver_db_host }}
+--gamedbname {{ ctf_gameserver_db_name }}
+--gamedbuser {{ ctf_gameserver_db_user_checker }}
+--gamedbpassword {{ ctf_gameserver_db_pass_checker }}
+
+--cachedbhost {{ ctf_gameserver_db_host }}
+--cachedbname {{ ctf_gameserver_statedb_name }}
+--cachedbuser {{ ctf_gameserver_statedb_user }}
+--cachedbpassword {{ ctf_gameserver_statedb_pass }}
+
+--maxtasks {{ ctf_gameserver_checker_maxtasks }}
+--minstart {{ ctf_gameserver_checker_minstart }}
+--maxstart {{ ctf_gameserver_checker_maxstart }}
+--refresh {{ ctf_gameserver_checker_refresh }}
+
+--loglevel {{ ctf_gameserver_checker_loglevel }}

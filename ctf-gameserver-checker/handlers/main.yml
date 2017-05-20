@@ -1,0 +1,4 @@
+- name: "Restart CTF Gameserver checkers"
+  systemd:
+    name: "ctf-checkermaster@*"
+    state: restarted

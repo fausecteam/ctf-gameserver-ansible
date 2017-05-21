@@ -1,0 +1,15 @@
+- name: "Install CTF Gameserver submission component"
+  apt:
+    state: present
+    deb: "{{ ctf_gameserver_downloadpath }}/{{ item }}"
+  with_items: "{{ ctf_gameserver_submission_packages }}"
+
+- name: "Add config for CTF Gameserver submission component"
+  template:
+    src: submission.conf.j2
+    dest: /etc/ctf-gameserver/submission.conf
+    owner: root
+    group: "{{ ctf_gameserver_submission_group }}"
+    mode: 0640
+  notify:
+    - Restart CTF Gameserver submission

@@ -1,0 +1,4 @@
+- name: "Restart CTF Gameserver submission"
+  systemd:
+    name: "ctf-submission@*"
+    state: restarted

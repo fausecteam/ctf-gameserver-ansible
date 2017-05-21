@@ -27,6 +27,7 @@
     DJANGO_SETTINGS_MODULE: prod_settings
   register: migrate_auth_result
   changed_when: "'No migrations to apply.' not in migrate_auth_result.stdout"
+  run_once: true
 
 - name: "Initialize CTF Gameserver database"
   command: django-admin migrate
@@ -35,6 +36,7 @@
     DJANGO_SETTINGS_MODULE: prod_settings
   register: migrate_result
   changed_when: "'No migrations to apply.' not in migrate_result.stdout"
+  run_once: true
 
 - name: "Install pexpect (for Ansible)"
   apt:
@@ -60,6 +62,7 @@
     PYTHONPATH: /etc/ctf-gameserver/web
     DJANGO_SETTINGS_MODULE: prod_settings
   register: ctf_gameserver_web_create_admin
+  run_once: true
 
 - name: "Add admin account create stamp"
   file:

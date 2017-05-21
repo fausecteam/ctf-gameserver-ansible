@@ -12,5 +12,6 @@
     privs: CREATE
     state: absent
     login_unix_socket: /run/postgresql
+  run_once: true
   become: true
   become_user: postgres

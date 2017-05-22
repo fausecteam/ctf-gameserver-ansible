@@ -1,0 +1,23 @@
+- name: "Install CTF Gameserver controller component"
+  apt:
+    state: present
+    deb: "{{ ctf_gameserver_downloadpath }}/{{ item }}"
+  with_items: "{{ ctf_gameserver_controller_packages }}"
+
+- name: "Add config for CTF Gameserver controller"
+  template:
+    src: controller.conf.j2
+    dest: /etc/ctf-gameserver/controller.conf
+    owner: root
+    group: "{{ ctf_gameserver_controller_group }}"
+    mode: 0640
+  # Nothing to be restarted, the service is "oneshot"
+
+- name: "Add config for CTF Gameserver scoring"
+  template:
+    src: scoring.conf.j2
+    dest: /etc/ctf-gameserver/scoring.conf
+    owner: root
+    group: "{{ ctf_gameserver_controller_group }}"
+    mode: 0640
+  # Nothing to be restarted, the service is "oneshot"

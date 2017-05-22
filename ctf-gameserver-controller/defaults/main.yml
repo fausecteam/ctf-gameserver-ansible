@@ -1,0 +1,12 @@
+ctf_gameserver_version: "1.0"
+
+ctf_gameserver_db_name: ctf_gameserver
+ctf_gameserver_db_user_controller: gameserver_controller
+
+ctf_gameserver_controller_packages:
+  - python3-ctf-gameserver_{{ ctf_gameserver_version }}_all.deb
+  - ctf-gameserver-controller_{{ ctf_gameserver_version }}_all.deb
+ctf_gameserver_controller_group: nogroup
+
+ctf_gameserver_controller_loglevel: WARNING
+ctf_gameserver_scoring_loglevel: WARNING

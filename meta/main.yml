@@ -1,0 +1,22 @@
+galaxy_info:
+  description: Roles to simplify setting up the different components of FAUST's CTF Gameserver
+  author: Felix Dreissig
+  company: FAUST -- FAU Security Team
+  license: ISC
+
+  min_ansible_version: 2.2
+
+  platforms:
+    - name: Debian
+      versions:
+        - jessie
+
+  galaxy_tags:
+    - ctf
+    - security
+    - clustering
+    - installer
+    - debian
+    - python
+    - database
+    - web

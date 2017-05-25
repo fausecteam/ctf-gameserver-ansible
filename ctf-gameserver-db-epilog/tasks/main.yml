@@ -119,6 +119,8 @@
     state: present
     login_unix_socket: /run/postgresql
   with_items:
+    - table: registration_team
+      privs: SELECT
     - table: scoring_capture
       privs: SELECT,INSERT
     - table: scoring_flag

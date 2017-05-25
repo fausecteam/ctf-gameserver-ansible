@@ -140,7 +140,7 @@
 - name: "Initialize checker state database"
   # The `quote` filter appears to use single quotes
   command: >
-    psql -c "CREATE TABLE {{ ctf_gameserver_statedb_name|quote }} (team_id INTEGER, service_id INTEGER,
+    psql -c "CREATE TABLE ctf_checkerstate (team_id INTEGER, service_id INTEGER,
     identifier CHARACTER VARYING (128), data BYTEA);" {{ ctf_gameserver_statedb_name|quote }}
   register: ctf_gameserver_statedb_create
   failed_when: ctf_gameserver_statedb_create.rc != 0 and 'already exists' not in ctf_gameserver_statedb_create.stderr
@@ -152,8 +152,8 @@
 # Don't do this at database initialization as `ctf_gameserver_statedb_user` might change
 - name: "Set owner for checker state database"
   command: >
-    psql -c "ALTER TABLE {{ ctf_gameserver_statedb_name|quote }} OWNER TO
-    {{ ctf_gameserver_statedb_user|quote }};" {{ ctf_gameserver_statedb_name|quote }}
+    psql -c "ALTER TABLE ctf_checkerstate OWNER TO {{ ctf_gameserver_statedb_user|quote }};"
+    {{ ctf_gameserver_statedb_name|quote }}
   run_once: true
   become: true
   become_user: postgres

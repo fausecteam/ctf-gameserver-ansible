@@ -13,3 +13,10 @@
     mode: 0640
   notify:
     - Restart CTF Gameserver submission
+
+- name: "Start CTF Gameserver submission component"
+  service:
+    name: ctf-submission@{{ item }}
+    state: started
+    enabled: true
+  with_items: "{{ ctf_gameserver_submission_ports }}"

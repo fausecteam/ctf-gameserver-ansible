@@ -8,6 +8,8 @@ ctf_gameserver_submission_packages:
   - python3-ctf-gameserver_{{ ctf_gameserver_version }}_all.deb
   - ctf-gameserver-submission_{{ ctf_gameserver_version }}_all.deb
 ctf_gameserver_submission_group: nogroup
+ctf_gameserver_submission_ports:
+  - 6666
 
 ctf_gameserver_submission_listen: localhost
 ctf_gameserver_submission_loglevel: WARNING

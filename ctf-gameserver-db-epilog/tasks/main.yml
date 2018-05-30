@@ -26,13 +26,19 @@
     state: present
     login_unix_socket: /run/postgresql
   with_items:
+    - table: auth_user
+      privs: SELECT
     - table: registration_team
       privs: SELECT
+    - table: scoring_capture
+      privs: SELECT
     - table: scoring_flag
-      privs: SELECT,INSERT
+      privs: SELECT,INSERT,UPDATE
     - table: scoring_gamecontrol
       privs: SELECT,INSERT
     - table: scoring_service
+      privs: SELECT
+    - table: scoring_statuscheck
       privs: SELECT
   run_once: true
   become: true

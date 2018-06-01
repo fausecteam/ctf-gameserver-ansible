@@ -35,7 +35,7 @@
     - table: scoring_flag
       privs: SELECT,INSERT,UPDATE
     - table: scoring_gamecontrol
-      privs: SELECT,INSERT
+      privs: SELECT,INSERT,UPDATE
     - table: scoring_service
       privs: SELECT
     - table: scoring_statuscheck

@@ -8,8 +8,7 @@ ctf_gameserver_statedb_user: "{{ ctf_gameserver_db_user_checker }}"
 ctf_gameserver_statedb_pass: "{{ ctf_gameserver_db_pass_checker }}"
 
 ctf_gameserver_checker_packages:
-  - python3-ctf-gameserver_{{ ctf_gameserver_version }}_all.deb
-  - ctf-gameserver-checker_{{ ctf_gameserver_version }}_all.deb
+  - ctf-gameserver_{{ ctf_gameserver_version }}_all.deb
 ctf_gameserver_checker_group: nogroup
 
 ctf_gameserver_checker_ippattern: 10.66.%d.2

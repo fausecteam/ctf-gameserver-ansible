@@ -6,10 +6,10 @@
 
 - name: "Add config for CTF Gameserver checkermaster"
   template:
-    src: checkermaster.conf.j2
-    dest: /etc/ctf-gameserver/checkermaster.conf
+    src: checkermaster.env.j2
+    dest: /etc/ctf-gameserver/checkermaster.env
     owner: root
-    group: "{{ ctf_gameserver_checker_group }}"
-    mode: 0640
+    group: root
+    mode: 0600
   notify:
     - Restart CTF Gameserver checkers

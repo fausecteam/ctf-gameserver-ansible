@@ -1,0 +1,4 @@
+- name: "Restart CTF Gameserver controller"
+  systemd:
+    name: "ctf-controller"
+    state: restarted

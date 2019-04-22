@@ -11,13 +11,5 @@
     owner: root
     group: "{{ ctf_gameserver_controller_group }}"
     mode: 0640
-  # Nothing to be restarted, the service is "oneshot"
-
-- name: "Add config for CTF Gameserver scoring"
-  template:
-    src: scoring.conf.j2
-    dest: /etc/ctf-gameserver/scoring.conf
-    owner: root
-    group: "{{ ctf_gameserver_controller_group }}"
-    mode: 0640
-  # Nothing to be restarted, the service is "oneshot"
+  notify:
+    - Restart CTF Gameserver controller

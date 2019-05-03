@@ -13,3 +13,8 @@
     mode: 0600
   notify:
     - Restart CTF Gameserver controller
+
+- name: "Enable CTF Gameserver controller"
+  service:
+    name: ctf-controller
+    enabled: true

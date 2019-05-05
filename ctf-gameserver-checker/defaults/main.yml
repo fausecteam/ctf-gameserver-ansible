@@ -15,4 +15,7 @@ ctf_gameserver_checker_maxtasks: 10
 ctf_gameserver_checker_minstart: 2
 ctf_gameserver_checker_maxstart: 2
 ctf_gameserver_checker_refresh: 3
+
 ctf_gameserver_checker_loglevel: WARNING
+ctf_gameserver_checker_journald: true
+ctf_gameserver_checker_gelf_server: ""

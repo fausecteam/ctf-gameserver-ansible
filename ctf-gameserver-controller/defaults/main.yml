@@ -7,4 +7,4 @@ ctf_gameserver_db_user_controller: gameserver_controller
 ctf_gameserver_controller_packages:
   - ctf-gameserver_{{ ctf_gameserver_version }}_all.deb
 
-ctf_gameserver_controller_loglevel: WARNING
+ctf_gameserver_controller_loglevel: INFO

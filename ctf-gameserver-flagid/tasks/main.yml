@@ -1,0 +1,19 @@
+- name: "Install CTF Gameserver flag ID script"
+  apt:
+    state: present
+    deb: "{{ ctf_gameserver_downloadpath }}/{{ item }}"
+  with_items: "{{ ctf_gameserver_flagid_packages }}"
+
+- name: "Add config for CTF Gameserver flag ID script"
+  template:
+    src: flagid.env.j2
+    dest: /etc/ctf-gameserver/flagid.env
+    owner: root
+    group: root
+    mode: 0600
+
+- name: "Enable CTF Gameserver flag ID script"
+  service:
+    name: ctf-flagid.timer
+    state: started
+    enabled: true

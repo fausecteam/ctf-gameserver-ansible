@@ -149,3 +149,29 @@
   run_once: true
   become: true
   become_user: postgres
+
+- name: "Grant flag ID database user necessary permission on Gameserver database"
+  postgresql_privs:
+    database: "{{ ctf_gameserver_db_name }}"
+    type: table
+    objs: scoring_service
+    roles: "{{ ctf_gameserver_db_user_flagid }}"
+    privs: SELECT
+    state: present
+    login_unix_socket: /run/postgresql
+  run_once: true
+  become: true
+  become_user: postgres
+
+- name: "Grant flag ID database user necessary permission on checker state database"
+  postgresql_privs:
+    database: "{{ ctf_gameserver_statedb_name }}"
+    type: table
+    objs: checkerstate
+    roles: "{{ ctf_gameserver_db_user_flagid }}"
+    privs: SELECT
+    state: present
+    login_unix_socket: /run/postgresql
+  run_once: true
+  become: true
+  become_user: postgres

@@ -36,3 +36,5 @@ ctf_gameserver_web_allowed_hosts:
   - "{{ ansible_fqdn }}"
 ctf_gameserver_web_timezone: UTC
 ctf_gameserver_web_first_day_of_week: 1
+
+ctf_gameserver_web_graylog_search_url: ""

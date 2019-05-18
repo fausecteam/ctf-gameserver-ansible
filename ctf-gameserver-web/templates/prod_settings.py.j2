@@ -88,6 +88,12 @@ TIME_ZONE = '{{ ctf_gameserver_web_timezone }}'
 # First day of the week: 0 means Sunday, 1 means Monday and so on
 FIRST_DAY_OF_WEEK = {{ ctf_gameserver_web_first_day_of_week }}
 
+{% if ctf_gameserver_web_graylog_search_url != '' %}
+# When using Graylog for checker logging, base URL for generating links to log searches
+# Probably either "http://<host>:<port>/search" or "http://<host>:<port>/streams/<stream>/search"
+GRAYLOG_SEARCH_URL = '{{ ctf_gameserver_web_graylog_search_url }}'
+{% endif %}
+
 
 # You should not have to edit anything below this line
 

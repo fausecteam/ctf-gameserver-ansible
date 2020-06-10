@@ -40,7 +40,10 @@
 
 - name: "Install pexpect (for Ansible)"
   apt:
-    name: python-pexpect
+    # Install both Python 2 and Python 3 packages because we don't know which interpreter is used by Ansible
+    name:
+      - python-pexpect
+      - python3-pexpect
     state: present
 
 - name: "Create admin account for CTF Gameserver web component"

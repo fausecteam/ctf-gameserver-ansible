@@ -5,7 +5,10 @@
 
 - name: "Install psycopg2 (for Ansible)"
   apt:
-    name: python-psycopg2
+    # Install both Python 2 and Python 3 packages because we don't know which interpreter is used by Ansible
+    name:
+      - python-psycopg2
+      - python3-psycopg2
     state: present
 
 - name: "Create databases for CTF Gameserver"

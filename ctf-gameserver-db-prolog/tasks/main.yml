@@ -154,7 +154,8 @@
   # The `quote` filter appears to use single quotes
   command: >
     psql -c "CREATE TABLE checkerstate (team_id INTEGER, service_id INTEGER,
-    identifier CHARACTER VARYING (128), data BYTEA);" {{ ctf_gameserver_statedb_name|quote }}
+    identifier CHARACTER VARYING (128), data TEXT, PRIMARY KEY (team_id, service_id, identifier));"
+    {{ ctf_gameserver_statedb_name|quote }}
   register: ctf_gameserver_statedb_create
   failed_when: ctf_gameserver_statedb_create.rc != 0 and 'already exists' not in ctf_gameserver_statedb_create.stderr
   changed_when: "'already exists' not in ctf_gameserver_statedb_create.stderr"

@@ -14,9 +14,9 @@ What's Included
 
 Requirements
 ------------
-The installation is designed to run on Debian GNU/Linux with systemd. At the moment, version Debian 9 ("Stretch") is our primary target. Ubuntu might work as well, but has not been tested.
+The installation is designed to run on Debian GNU/Linux with systemd. At the moment, version Debian 10 ("Buster") is our primary target. Ubuntu might work as well, but has not been tested.
 
-The roles have primarily tested with Ansible 2.4. Ansible >= 2.2 should probably be fine as well, but we can't assess the situation for even earlier versions.
+The roles have primarily tested with Ansible 2.4 and 2.9. Ansible >= 2.2 should probably be fine, but we can't assess the situation for even earlier versions.
 
 It is expected that you build your own Debian packages for CTF Gameserver as described [in the documentation](TODO). These must be available under the base URL in the `ctf_gameserver_downloadpath` variable (see below).
 

@@ -42,14 +42,6 @@
   apt:
     name: python-pexpect
     state: present
-  when: not (ansible_distribution == 'Debian' and ansible_distribution_release == 'jessie')
-
-- name: "Install pexpect (for Ansible) from backports"
-  apt:
-    name: python-pexpect
-    default_release: jessie-backports
-    state: present
-  when: ansible_distribution == 'Debian' and ansible_distribution_release == 'jessie'
 
 - name: "Create admin account for CTF Gameserver web component"
   expect:

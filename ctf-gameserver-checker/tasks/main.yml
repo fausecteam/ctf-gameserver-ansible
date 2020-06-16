@@ -4,6 +4,11 @@
     deb: "{{ ctf_gameserver_downloadpath }}/{{ item }}"
   with_items: "{{ ctf_gameserver_checker_packages }}"
 
+- name: "Install sudo"
+  apt:
+    name: sudo
+    state: present
+
 - name: "Add config for CTF Gameserver checkermaster"
   template:
     src: checkermaster.env.j2

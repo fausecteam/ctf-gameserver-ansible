@@ -10,6 +10,7 @@ ctf_gameserver_statedb_pass: "{{ ctf_gameserver_db_pass_checker }}"
 ctf_gameserver_checker_packages:
   - ctf-gameserver_{{ ctf_gameserver_version }}_all.deb
 
+ctf_gameserver_checker_sudo_user: ctf-checkerrunner
 ctf_gameserver_checker_ippattern: 10.66.%d.2
 
 ctf_gameserver_checker_loglevel: INFO

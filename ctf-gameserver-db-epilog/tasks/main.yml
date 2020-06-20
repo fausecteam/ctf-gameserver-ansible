@@ -93,6 +93,8 @@
     state: present
     login_unix_socket: /run/postgresql
   with_items:
+    - table: registration_team
+      privs: SELECT
     - table: scoring_flag
       privs: SELECT,UPDATE
     - table: scoring_gamecontrol

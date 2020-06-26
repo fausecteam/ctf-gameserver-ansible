@@ -6,6 +6,15 @@
       - python3-psycopg2
     state: present
 
+- name: "Create Materialized View for scoring"
+  postgresql_query:
+    db: "{{ ctf_gameserver_db_name }}"
+    query: "{{ lookup('file', 'files/scoring.sql') }}"
+    login_unix_socket: /run/postgresql
+  run_once: true
+  become: true
+  become_user: postgres
+
 - name: "Prevent web component database user from creating objects in the schema"
   postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"

@@ -6,6 +6,17 @@
       - python3-psycopg2
     state: present
 
+- name: "Drop existing Table for scoring"
+  postgresql_query:
+    db: "{{ ctf_gameserver_db_name }}"
+    query: "DROP TABLE IF EXISTS scoring_scoreboard;"
+    login_unix_socket: /run/postgresql
+  # This will fail if there exists something which is not a Table (i.e. Materialized View already exists)
+  ignore_errors: true
+  run_once: true
+  become: true
+  become_user: postgres
+
 - name: "Create Materialized View for scoring"
   postgresql_query:
     db: "{{ ctf_gameserver_db_name }}"

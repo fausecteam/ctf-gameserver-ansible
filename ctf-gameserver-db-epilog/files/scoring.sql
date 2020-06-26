@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS "scoring_scoreboard";
 DROP MATERIALIZED VIEW IF EXISTS "scoring_scoreboard";
 
 -- Scoreboard

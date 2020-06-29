@@ -4,6 +4,18 @@
     deb: "{{ ctf_gameserver_downloadpath }}/{{ item }}"
   with_items: "{{ ctf_gameserver_web_packages }}"
 
+- name: Install python-memcached
+  apt:
+    state: present
+    name: python3-memcache
+  when: ctf_gameserver_web_cache_backend == 'django.core.cache.backends.memcached.MemcachedCache'
+
+- name: Install pylibmc
+  apt:
+    state: present
+    name: python3-pylibmc
+  when: ctf_gameserver_web_cache_backend == 'django.core.cache.backends.memcached.PyLibMCCache'
+
 - name: "Add config for CTF Gameserver web component"
   template:
     src: prod_settings.py.j2

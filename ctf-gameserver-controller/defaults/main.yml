@@ -8,3 +8,4 @@ ctf_gameserver_controller_packages:
   - ctf-gameserver_{{ ctf_gameserver_version }}_all.deb
 
 ctf_gameserver_controller_loglevel: INFO
+ctf_gameserver_controller_metrics_listen: "[::]:9001"

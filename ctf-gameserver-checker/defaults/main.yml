@@ -16,3 +16,4 @@ ctf_gameserver_checker_ippattern: 10.66.%d.2
 ctf_gameserver_checker_loglevel: INFO
 ctf_gameserver_checker_journald: true
 ctf_gameserver_checker_gelf_server: ""
+ctf_gameserver_checker_metrics_listen: "[::]:9002"

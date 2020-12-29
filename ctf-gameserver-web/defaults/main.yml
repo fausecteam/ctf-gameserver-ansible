@@ -1,5 +1,4 @@
 ctf_gameserver_version: "1.0"
-ctf_gameserver_competition_name: Default CTF
 
 ctf_gameserver_db_host: localhost
 ctf_gameserver_db_port: 5432

@@ -46,7 +46,6 @@ Most of the variables have default values, but some do not and are therefore str
 * All roles
     * `ctf_gameserver_downloadpath`: The  base URL under which your Debian packages for CTF Gameserver are available
     * `ctf_gameserver_db_host`: Defaults to "localhost", must at least be changed if the different components run on individual hosts
-    * `ctf_gameserver_competition_name`: Defaults to "Default CTF", you might want to change it to your competition's name
 
 * `ctf-gameserver-db-prolog`
     * `ctf_gameserver_db_pass_web`: Password of the web component's database user (name is set through `ctf_gameserver_db_user_web`, "gameserver_web" by default)

@@ -3,9 +3,6 @@ ctf_gameserver_version: "1.0"
 ctf_gameserver_db_host: localhost
 ctf_gameserver_db_name: ctf_gameserver
 ctf_gameserver_db_user_checker: gameserver_checker
-ctf_gameserver_statedb_name: ctf_checkerstate
-ctf_gameserver_statedb_user: "{{ ctf_gameserver_db_user_checker }}"
-ctf_gameserver_statedb_pass: "{{ ctf_gameserver_db_pass_checker }}"
 
 ctf_gameserver_checker_packages:
   - ctf-gameserver_{{ ctf_gameserver_version }}_all.deb

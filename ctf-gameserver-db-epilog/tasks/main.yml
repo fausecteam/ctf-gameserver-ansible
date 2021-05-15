@@ -129,15 +129,20 @@
   become: true
   become_user: postgres
 
-- name: "Grant checker component database user permission on statuscheck ID sequence"
+- name: "Grant checker component database user necessary sequence permissions"
   postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: sequence
-    objs: scoring_statuscheck_id_seq
+    objs: "{{ item.table }}"
     roles: "{{ ctf_gameserver_db_user_checker }}"
-    privs: SELECT,UPDATE
+    privs: "{{ item.privs }}"
     state: present
     login_unix_socket: /run/postgresql
+  with_items:
+    - table: scoring_statuscheck_id_seq
+      privs: SELECT,UPDATE
+    - table: scoring_checkerstate_id_seq
+      privs: SELECT,UPDATE
   run_once: true
   become: true
   become_user: postgres

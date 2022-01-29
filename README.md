@@ -14,7 +14,7 @@ What's Included
 
 Requirements
 ------------
-The installation is designed to run on Debian GNU/Linux with systemd. At the moment, version Debian 10 ("Buster") is our primary target. Ubuntu might work as well, but has not been tested.
+The installation is designed to run on Debian GNU/Linux with systemd. At the moment, version Debian 11 ("Bullseye") is our primary target. The Debian backports repository must be enabled. Ubuntu might work as well, but has not been tested.
 
 The roles should work with any Ansible version >= 2.5 and have primarily tested with Ansible 2.9.
 

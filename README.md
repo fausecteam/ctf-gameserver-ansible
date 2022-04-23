@@ -72,8 +72,8 @@ Most of the variables have default values, but some do not and are therefore str
 * `ctf-gameserver-submission`
     * `ctf_gameserver_db_pass_submission`: See above
     * `ctf_gameserver_flag_secret`: Secret for the flags's HMAC, i.e. a random byte-string in Base-64 format
-    * `ctf_gameserver_submission_listen`: Defaults to "localhost", must be changed to listen on another IP address or hostname
-    * `ctf_gameserver_submission_ports`: A list of ports to listen on, defaults to the single port 6666
+    * `ctf_gameserver_submission_listen_host`: Defaults to "localhost", must be changed to listen on another IP address or hostname
+    * `ctf_gameserver_submission_listen_ports`: A list of ports to listen on, defaults to the single port 6666
 
 * `ctf-gameserver-checker`
     * `ctf_gameserver_db_pass_checker`: See above

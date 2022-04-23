@@ -19,4 +19,4 @@
     name: ctf-submission@{{ item }}
     state: started
     enabled: true
-  with_items: "{{ ctf_gameserver_submission_ports }}"
+  with_items: "{{ ctf_gameserver_submission_listen_ports }}"

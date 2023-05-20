@@ -26,6 +26,14 @@
     group: "{{ ctf_gameserver_web_group }}"
     mode: 0770
 
+- name: "Create CTF Gameserver team downloads directory"
+  file:
+    path: "{{ ctf_gameserver_web_team_downloads_root }}"
+    state: directory
+    owner: root
+    group: "{{ ctf_gameserver_web_group }}"
+    mode: 0750
+
 - name: "Initialize Django auth in CTF Gameserver database"
   command: django-admin migrate auth
   environment:

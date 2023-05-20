@@ -30,6 +30,7 @@ ctf_gameserver_web_email_pass: ""
 ctf_gameserver_web_email_use_tls: false
 ctf_gameserver_web_email_use_ssl: false
 ctf_gameserver_web_media_root: /var/www/gameserver_uploads
+ctf_gameserver_web_team_downloads_root: /var/lib/ctf-gameserver/team-downloads
 ctf_gameserver_web_session_engine: django.contrib.sessions.backends.cached_db
 ctf_gameserver_web_allowed_hosts:
   - "{{ ansible_fqdn }}"

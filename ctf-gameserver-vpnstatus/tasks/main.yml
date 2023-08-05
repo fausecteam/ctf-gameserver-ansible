@@ -1,0 +1,33 @@
+- name: "Install CTF Gameserver VPN Status component"
+  apt:
+    state: present
+    deb: "{{ ctf_gameserver_downloadpath }}/{{ item }}"
+  with_items: "{{ ctf_gameserver_vpnstatus_packages }}"
+
+- name: "Add config for CTF Gameserver VPN Status"
+  template:
+    src: vpnstatus.env.j2
+    dest: /etc/ctf-gameserver/vpnstatus.env
+    owner: root
+    group: root
+    mode: 0600
+  notify:
+    - Restart CTF Gameserver VPN Status
+
+- name: "Install sudo"
+  apt:
+    name: sudo
+    state: present
+
+- name: "Add sudoers config for CTF Gameserver VPN Status"
+  template:
+    src: sudoers.j2
+    dest: /etc/sudoers.d/ctf-vpnstatus
+    owner: root
+    group: root
+    mode: 0600
+
+- name: "Enable CTF Gameserver VPN Status"
+  service:
+    name: ctf-vpnstatus
+    enabled: true

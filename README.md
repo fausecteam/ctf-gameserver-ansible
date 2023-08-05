@@ -10,6 +10,7 @@ What's Included
 * `ctf-gameserver-db-prolog` installs PostgreSQL, creates the required databases, sets their permissions and prepares the main database for initialization through `ctf-gameserver-web`. No configuration of the PostgreSQL server is performed, so you probably still have to and fine-tune the settings in "postgresql.conf" and allow remote access in "pg_hba.conf".
 * `ctf-gameserver-db-epilog` adjusts database permissions once the main database has been initialized through `ctf-gameserver-web`.
 * `ctf-gameserver-submission` performs installation and configuration of the [Submission component](https://www.ctf-gameserver.org/flags.html#submission).
+* `ctf-gameserver-vpnstatus` performs installation and configuration of the VPN Status Checker component.
 * `ctf-gameserver-web` installs and configures the [Web component](https://www.ctf-gameserver.org/web.html). It also intializes the main databse (using Django's facilities). Only the raw WSGI interface is provided, so you still have to set up a web and application server (like uwsgi) yourself.
 
 Requirements
@@ -36,7 +37,7 @@ When using the roles in your own playbook, ordering is crucial. This is regardle
 1. `ctf-gameserver-db-prolog`: Must run before all other roles, as it creates their databases.
 2. `ctf-gameserver-web`: Initializes the main database, therefore it should be next.
 3. `ctf-gameserver-db-epilog`: Must run after `ctf-gameserver-web`.
-4. `ctf-gameserver-controller`, `ctf-gameserver-submission` and `ctf-gameserver-checker`: The ordering between these does not really matter.
+4. `ctf-gameserver-controller`, `ctf-gameserver-submission`, `ctf-gameserver-checker`, and `ctf-gameserver-vpnstatus`: The ordering between these does not really matter.
 
 ### Variables
 The roles' behavior can be tuned with various Ansible variables. You can set these [wherever you set variables](https://docs.ansible.com/ansible/2.4/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable) for your playbook, for example at the group and host level or even in [Ansible Vault](http://docs.ansible.com/ansible/2.4/vault.html).
@@ -78,6 +79,15 @@ Most of the variables have default values, but some do not and are therefore str
 * `ctf-gameserver-checker`
     * `ctf_gameserver_db_pass_checker`: See above
     * `ctf_gameserver_flag_secret`: See above
+
+* `ctf-gameserver-vpnstatus`
+    * `ctf_gameserver_db_pass_vpnstatus`: See above
+    * `ctf_gameserver_vpnstatus_wireguard_ifpattern`: Optional, (old-style) Python formatstring for building a team's Wireguard interface, e.g. "wg%d"
+    * `ctf_gameserver_vpnstatus_gateway_ippattern`: Optional, (old-style) Python formatstring for building a team's gateway IP, e.g. "10.66.%d.1"
+    * `ctf_gameserver_vpnstatus_demo_ippattern`: Optional, (old-style) Python formatstring for building a team's demo Vulnbox IP
+    * `ctf_gameserver_vpnstatus_demo_serviceport`: Optional, TCP port for service checks on demo Vulnboxes
+    * `ctf_gameserver_vpnstatus_vulnbox_ippattern`: Optional, (old-style) Python formatstring for building a team's Vulnbox IP
+    * `ctf_gameserver_vpnstatus_vulnbox_serviceport`: Optional, TCP port for service checks on Vulnboxes
 
 License
 -------

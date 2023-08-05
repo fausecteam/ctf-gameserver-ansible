@@ -9,6 +9,14 @@
     name: sudo
     state: present
 
+- name: "Add sudoers config for CTF Gameserver checker component"
+  template:
+    src: sudoers.j2
+    dest: /etc/sudoers.d/ctf-checker
+    owner: root
+    group: root
+    mode: 0600
+
 - name: "Add config for CTF Gameserver checkermaster"
   template:
     src: checkermaster.env.j2

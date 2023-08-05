@@ -7,7 +7,7 @@ What's Included
 ---------------
 * `ctf-gameserver-checker` performs a basic installation of the [Checker component](https://www.ctf-gameserver.org/checker.html) and configuration of the Checkermaster. You still have to add your own config to check individual services.
 * `ctf-gameserver-controller` installs and configures the [Controller component](https://www.ctf-gameserver.org/controller.html) including [scoring](TODO).
-* `ctf-gameserver-db-prolog` installs PostgreSQL, creates the required databases, sets their permissions and preparses the main database for intialization through `ctf-gameserver-web`. No configuration of the PostgreSQL server is performed, so you probably still have to and fine-tune the settings in "postgresql.conf" and allow remote access in "pg_hba.conf".
+* `ctf-gameserver-db-prolog` installs PostgreSQL, creates the required databases, sets their permissions and prepares the main database for initialization through `ctf-gameserver-web`. No configuration of the PostgreSQL server is performed, so you probably still have to and fine-tune the settings in "postgresql.conf" and allow remote access in "pg_hba.conf".
 * `ctf-gameserver-db-epilog` adjusts database permissions once the main database has been initialized through `ctf-gameserver-web`.
 * `ctf-gameserver-submission` performs installation and configuration of the [Submission component](https://www.ctf-gameserver.org/flags.html#submission).
 * `ctf-gameserver-web` installs and configures the [Web component](https://www.ctf-gameserver.org/web.html). It also intializes the main databse (using Django's facilities). Only the raw WSGI interface is provided, so you still have to set up a web and application server (like uwsgi) yourself.
@@ -44,7 +44,7 @@ The roles' behavior can be tuned with various Ansible variables. You can set the
 Most of the variables have default values, but some do not and are therefore strictly required for you to set. The following is a list of variables which must be set or at least are commonly set. For a list of other options and their defaults, have a look at the "defaults/main.yml" files of the roles.
 
 * All roles
-    * `ctf_gameserver_downloadpath`: The  base URL under which your Debian packages for CTF Gameserver are available
+    * `ctf_gameserver_downloadpath`: The base URL under which your Debian packages for CTF Gameserver are available
     * `ctf_gameserver_db_host`: Defaults to "localhost", must at least be changed if the different components run on individual hosts
 
 * `ctf-gameserver-db-prolog`

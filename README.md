@@ -1,7 +1,7 @@
 CTF Gameserver Ansible
 ======================
 
-This repository contains Ansible roles to simplify setting up the different components of @fausecteam's [CTF Gameserver](https://www.ctf-gameserver.org) on multiple individual hosts or a single, shared one. They can be used in your own Ansible playbooks.
+This repository contains a collection of Ansible roles to simplify setting up the different components of @fausecteam's [CTF Gameserver](https://www.ctf-gameserver.org) on multiple individual hosts or a single, shared one. They can be used in your own Ansible playbooks.
 
 What's Included
 ---------------
@@ -17,7 +17,7 @@ Requirements
 ------------
 The installation is designed to run on Debian GNU/Linux with systemd. At the moment, version Debian 11 ("Bullseye") is our primary target. The Debian backports repository must be enabled. Ubuntu might work as well, but has not been tested.
 
-The roles should work with any Ansible version >= 2.5 and have primarily tested with Ansible 2.9.
+The roles do not have any notable requirements on recent Ansible features. They should work with any Ansible version that supports Collections, which is Ansible (or ansible-core) >= 2.9.
 
 It is expected that you build your own Debian packages for CTF Gameserver as described [in the documentation](TODO). These must be available under the base URL in the `ctf_gameserver_downloadpath` variable (see below).
 
@@ -26,10 +26,12 @@ All roles expect be run as root user, either through direct root login or using 
 How To Use
 ----------
 ### Installation
-Either install the role through [Ansible Galaxy](http://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html) by running `ansible-galaxy install fausecteam.ctf-gameserver-ansible` or add this repository to your playbook's repository as a Git submodule. For the latter, e.g. put the submodule at the Ansible top level and add the following to your "ansible.cfg":
+Either install the role through [Ansible Galaxy](http://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html) by running `ansible-galaxy collection install fausecteam.ctf_gameserver_ansible` or add this repository to your playbook's repository as a Git submodule.
+
+For the latter, e.g. place the submodule at "ansible\_collections/fausecteam/ctf\_gameserver\_ansible" and add the following to your "ansible.cfg":
 
     [defaults]
-    roles_path = ctf-gameserver-ansible
+    collections_paths = .:~/.ansible/collections:/usr/share/ansible/collections
 
 ### Ordering
 When using the roles in your own playbook, ordering is crucial. This is regardless of whether the components should run on individual hosts or a shared one.

@@ -1,11 +1,11 @@
 - name: "Install CTF Gameserver VPN Status component"
-  apt:
+  ansible.builtin.apt:
     state: present
     deb: "{{ ctf_gameserver_downloadpath }}/{{ item }}"
   with_items: "{{ ctf_gameserver_vpnstatus_packages }}"
 
 - name: "Add config for CTF Gameserver VPN Status"
-  template:
+  ansible.builtin.template:
     src: vpnstatus.env.j2
     dest: /etc/ctf-gameserver/vpnstatus.env
     owner: root
@@ -15,12 +15,12 @@
     - Restart CTF Gameserver VPN Status
 
 - name: "Install sudo"
-  apt:
+  ansible.builtin.apt:
     name: sudo
     state: present
 
 - name: "Add sudoers config for CTF Gameserver VPN Status"
-  template:
+  ansible.builtin.template:
     src: sudoers.j2
     dest: /etc/sudoers.d/ctf-vpnstatus
     owner: root
@@ -28,6 +28,6 @@
     mode: 0600
 
 - name: "Enable CTF Gameserver VPN Status"
-  service:
+  ansible.builtin.service:
     name: ctf-vpnstatus
     enabled: true

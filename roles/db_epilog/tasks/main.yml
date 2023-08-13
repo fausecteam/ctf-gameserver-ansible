@@ -1,10 +1,10 @@
 - name: "Install psycopg2 (for Ansible)"
-  apt:
+  ansible.builtin.apt:
     name: python3-psycopg2
     state: present
 
 - name: "Drop existing Table for scoring"
-  postgresql_query:
+  community.postgresql.postgresql_query:
     db: "{{ ctf_gameserver_db_name }}"
     query: "DROP TABLE IF EXISTS scoring_scoreboard;"
     login_unix_socket: /run/postgresql
@@ -15,7 +15,7 @@
   become_user: postgres
 
 - name: "Create Materialized View for scoring"
-  postgresql_query:
+  community.postgresql.postgresql_query:
     db: "{{ ctf_gameserver_db_name }}"
     query: "{{ lookup('file', 'files/scoring.sql') }}"
     login_unix_socket: /run/postgresql
@@ -24,7 +24,7 @@
   become_user: postgres
 
 - name: "Prevent web component database user from creating objects in the schema"
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: schema
     objs: public
@@ -37,7 +37,7 @@
   become_user: postgres
 
 - name: "Grant controller component database user necessary table permissions"
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: table
     objs: "{{ item.table }}"
@@ -65,7 +65,7 @@
   become_user: postgres
 
 - name: "Grant controller component database user permission on flag ID sequence"
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: sequence
     objs: scoring_flag_id_seq
@@ -79,7 +79,7 @@
 
 - name: "Set owner of scoreboard table"
   # The `quote` filter appears to use single quotes
-  command: >
+  ansible.builtin.command: >
     psql -c "ALTER TABLE scoring_scoreboard OWNER TO {{ ctf_gameserver_db_user_controller|quote }};"
     {{ ctf_gameserver_db_name|quote }}
   run_once: true
@@ -88,7 +88,7 @@
 
 # Other permissions are available through ownership
 - name: "Grant web component database user permission on scoreboard table"
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: table
     objs: scoring_scoreboard
@@ -101,7 +101,7 @@
   become_user: postgres
 
 - name: "Grant checker component database user necessary table permissions"
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: table
     objs: "{{ item.table }}"
@@ -127,7 +127,7 @@
   become_user: postgres
 
 - name: "Grant checker component database user necessary sequence permissions"
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: sequence
     objs: "{{ item.table }}"
@@ -145,7 +145,7 @@
   become_user: postgres
 
 - name: "Grant submission component database user necessary table permissions"
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: table
     objs: "{{ item.table }}"
@@ -167,7 +167,7 @@
   become_user: postgres
 
 - name: "Grant submission component database user permission on capture ID sequence"
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: sequence
     objs: scoring_capture_id_seq

@@ -1,15 +1,15 @@
 - name: "Install PostgreSQL"
-  apt:
+  ansible.builtin.apt:
     name: postgresql
     state: present
 
 - name: "Install psycopg2 (for Ansible)"
-  apt:
+  ansible.builtin.apt:
     name: python3-psycopg2
     state: present
 
 - name: "Create database for CTF Gameserver"
-  postgresql_db:
+  community.postgresql.postgresql_db:
     name: "{{ ctf_gameserver_db_name }}"
     state: present
     login_unix_socket: /run/postgresql
@@ -18,7 +18,7 @@
   become_user: postgres
 
 - name: "Revoke privileges for PUBLIC from the database"
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: database
     roles: PUBLIC
@@ -32,7 +32,7 @@
 # Use the default "public" schema and make it not-so-public, this is a common practice according to
 # https://stackoverflow.com/a/25586847
 - name: "Revoke privileges for PUBLIC from the database schemas"
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: schema
     objs: public
@@ -45,7 +45,7 @@
   become_user: postgres
 
 - name: "Create database users for CTF Gameserver components"
-  postgresql_user:
+  community.postgresql.postgresql_user:
     name: "{{ item.user }}"
     password: "{{ item.pass }}"
     encrypted: true
@@ -67,7 +67,7 @@
   no_log: true
 
 - name: "Allow database users to connect to the Gameserver database"
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: database
     roles: "{{ item }}"
@@ -84,7 +84,7 @@
   become_user: postgres
 
 - name: "Allow database users to use the Gameserver database schema"
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: schema
     objs: public
@@ -102,7 +102,7 @@
   become_user: postgres
 
 - name: "(Temporarily) allow web component database user to create objects in the schema"
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: schema
     objs: public

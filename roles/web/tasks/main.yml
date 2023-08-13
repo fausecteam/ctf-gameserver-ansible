@@ -1,17 +1,17 @@
 - name: "Install Django from Debian backports"
-  apt:
+  ansible.builtin.apt:
     state: present
     name: python3-django
     default_release: bullseye-backports
 
 - name: "Install CTF Gameserver web component"
-  apt:
+  ansible.builtin.apt:
     state: present
     deb: "{{ ctf_gameserver_downloadpath }}/{{ item }}"
   with_items: "{{ ctf_gameserver_web_packages }}"
 
 - name: "Add config for CTF Gameserver web component"
-  template:
+  ansible.builtin.template:
     src: prod_settings.py.j2
     dest: /etc/ctf-gameserver/web/prod_settings.py
     owner: root
@@ -19,7 +19,7 @@
     mode: 0640
 
 - name: "Create CTF Gameserver web uploads directory"
-  file:
+  ansible.builtin.file:
     path: "{{ ctf_gameserver_web_media_root }}"
     state: directory
     owner: root
@@ -27,7 +27,7 @@
     mode: 0770
 
 - name: "Create CTF Gameserver team downloads directory"
-  file:
+  ansible.builtin.file:
     path: "{{ ctf_gameserver_web_team_downloads_root }}"
     state: directory
     owner: root
@@ -35,7 +35,7 @@
     mode: 0750
 
 - name: "Initialize Django auth in CTF Gameserver database"
-  command: django-admin migrate auth
+  ansible.builtin.command: django-admin migrate auth
   environment:
     PYTHONPATH: /etc/ctf-gameserver/web
     DJANGO_SETTINGS_MODULE: prod_settings
@@ -44,7 +44,7 @@
   run_once: true
 
 - name: "Initialize CTF Gameserver database"
-  command: django-admin migrate
+  ansible.builtin.command: django-admin migrate
   environment:
     PYTHONPATH: /etc/ctf-gameserver/web
     DJANGO_SETTINGS_MODULE: prod_settings
@@ -53,12 +53,12 @@
   run_once: true
 
 - name: "Install pexpect (for Ansible)"
-  apt:
+  ansible.builtin.apt:
     name: python3-pexpect
     state: present
 
 - name: "Create admin account for CTF Gameserver web component"
-  expect:
+  ansible.builtin.expect:
     command: django-admin createsuperuser --username {{ ctf_gameserver_web_admin_user }} --email {{ ctf_gameserver_web_admin_email }}
     responses:
       Password: "{{ ctf_gameserver_web_admin_pass }}"
@@ -71,7 +71,7 @@
   run_once: true
 
 - name: "Add admin account create stamp"
-  file:
+  ansible.builtin.file:
     path: /root/.ansible_ctf_gameserver_web_admin_createstamp
     state: touch
   when: ctf_gameserver_web_create_admin.changed

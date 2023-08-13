@@ -1,16 +1,16 @@
 - name: "Install CTF Gameserver checker component"
-  apt:
+  ansible.builtin.apt:
     state: present
     deb: "{{ ctf_gameserver_downloadpath }}/{{ item }}"
   with_items: "{{ ctf_gameserver_checker_packages }}"
 
 - name: "Install sudo"
-  apt:
+  ansible.builtin.apt:
     name: sudo
     state: present
 
 - name: "Add sudoers config for CTF Gameserver checker component"
-  template:
+  ansible.builtin.template:
     src: sudoers.j2
     dest: /etc/sudoers.d/ctf-checker
     owner: root
@@ -18,7 +18,7 @@
     mode: 0600
 
 - name: "Add config for CTF Gameserver checkermaster"
-  template:
+  ansible.builtin.template:
     src: checkermaster.env.j2
     dest: /etc/ctf-gameserver/checkermaster.env
     owner: root

@@ -1,11 +1,11 @@
 - name: "Install CTF Gameserver controller component"
-  apt:
+  ansible.builtin.apt:
     state: present
     deb: "{{ ctf_gameserver_downloadpath }}/{{ item }}"
   with_items: "{{ ctf_gameserver_controller_packages }}"
 
 - name: "Add config for CTF Gameserver controller"
-  template:
+  ansible.builtin.template:
     src: controller.env.j2
     dest: /etc/ctf-gameserver/controller.env
     owner: root
@@ -15,6 +15,6 @@
     - Restart CTF Gameserver controller
 
 - name: "Enable CTF Gameserver controller"
-  service:
+  ansible.builtin.service:
     name: ctf-controller
     enabled: true

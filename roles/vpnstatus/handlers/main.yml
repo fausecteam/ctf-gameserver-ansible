@@ -1,4 +1,4 @@
 - name: "Restart CTF Gameserver VPN Status"
-  systemd:
+  ansible.builtin.systemd:
     name: "ctf-vpnstatus"
     state: restarted

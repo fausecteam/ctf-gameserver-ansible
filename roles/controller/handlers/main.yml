@@ -1,4 +1,4 @@
 - name: "Restart CTF Gameserver controller"
-  systemd:
+  ansible.builtin.systemd:
     name: "ctf-controller"
     state: restarted

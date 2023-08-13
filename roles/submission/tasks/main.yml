@@ -1,11 +1,11 @@
 - name: "Install CTF Gameserver submission component"
-  apt:
+  ansible.builtin.apt:
     state: present
     deb: "{{ ctf_gameserver_downloadpath }}/{{ item }}"
   with_items: "{{ ctf_gameserver_submission_packages }}"
 
 - name: "Add global config for CTF Gameserver submission component"
-  template:
+  ansible.builtin.template:
     src: submission.env.j2
     dest: /etc/ctf-gameserver/submission.env
     owner: root
@@ -15,7 +15,7 @@
     - Restart CTF Gameserver submission
 
 - name: "Add instance config for CTF Gameserver submission component"
-  template:
+  ansible.builtin.template:
     src: submission-instance.env.j2
     dest: /etc/ctf-gameserver/submission-{{ item.1 }}.env
     owner: root
@@ -29,7 +29,7 @@
   with_indexed_items: "{{ ctf_gameserver_submission_listen_ports }}"
 
 - name: "Start CTF Gameserver submission component"
-  service:
+  ansible.builtin.service:
     name: ctf-submission@{{ item }}
     state: started
     enabled: true

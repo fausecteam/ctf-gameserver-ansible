@@ -9,7 +9,7 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - bullseye
+        - bookworm
 
   galaxy_tags:
     - ctf

@@ -2,7 +2,7 @@
   ansible.builtin.apt:
     state: present
     name: python3-django
-    default_release: bullseye-backports
+    default_release: bookworm
 
 - name: "Install CTF Gameserver web component"
   ansible.builtin.apt:

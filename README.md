@@ -1,13 +1,13 @@
 CTF Gameserver Ansible
 ======================
 
-This repository contains a collection of Ansible roles to simplify setting up the different components of @fausecteam's [CTF Gameserver](https://www.ctf-gameserver.org) on multiple individual hosts or a single, shared one. They can be used in your own Ansible playbooks.
+This repository contains a collection of Ansible roles to simplify setting up the different components of FAUST's [CTF Gameserver](https://www.ctf-gameserver.org) on multiple individual hosts or a single, shared one. They can be used in your own Ansible playbooks.
 
 What's Included
 ---------------
 * `ctf_gameserver_checker` performs a basic installation of the [Checker component](https://www.ctf-gameserver.org/checker.html) and configuration of the Checkermaster. You still have to add your own config to check individual services.
-* `ctf_gameserver_controller` installs and configures the [Controller component](https://www.ctf-gameserver.org/controller.html) including [scoring](TODO).
-* `ctf_gameserver_db_prolog` installs PostgreSQL, creates the required databases, sets their permissions and prepares the main database for initialization through `ctf_gameserver_web`. No configuration of the PostgreSQL server is performed, so you probably still have to and fine-tune the settings in "postgresql.conf" and allow remote access in "pg_hba.conf".
+* `ctf_gameserver_controller` installs and configures the [Controller component](https://www.ctf-gameserver.org/controller.html) including scoring.
+* `ctf_gameserver_db_prolog` installs PostgreSQL, creates the required databases, sets their permissions and prepares the main database for initialization through `ctf_gameserver_web`. No configuration of the PostgreSQL server is performed, so you probably still have to and fine-tune the settings in "postgresql.conf" and allow remote access in "pg\_hba.conf".
 * `ctf_gameserver_db_epilog` adjusts database permissions once the main database has been initialized through `ctf_gameserver_web`.
 * `ctf_gameserver_submission` performs installation and configuration of the [Submission component](https://www.ctf-gameserver.org/flags.html#submission).
 * `ctf_gameserver_vpnstatus` performs installation and configuration of the VPN Status Checker component.
@@ -19,7 +19,7 @@ The installation is designed to run on Debian GNU/Linux with systemd. At the mom
 
 The roles do not have any notable requirements on recent Ansible features. They should work with any Ansible version that supports Collections, which is Ansible (or ansible-core) >= 2.9.
 
-It is expected that you build your own Debian packages for CTF Gameserver as described [in the documentation](TODO). These must be available under the base URL in the `ctf_gameserver_downloadpath` variable (see below).
+It is expected that you build your own Debian packages for CTF Gameserver. These must be available under the base URL in the `ctf_gameserver_downloadpath` variable (see below).
 
 All roles expect be run as root user, either through direct root login or using Ansible's [privilege escalation facilities](https://docs.ansible.com/ansible/2.4/become.html). For the `ctf_gameserver_db_prolog` and `ctf_gameserver_db_epilog` roles, you have to make sure that `become`-ing an unprivileged user is possible as [described in the Ansible docs](https://docs.ansible.com/ansible/2.4/become.html#becoming-an-unprivileged-user). From our experience, the easiest option for that is [enabling ACL support](https://help.ubuntu.com/community/FilePermissionsACLs#Enabling_ACLs_in_the_Filesystem) for your file system.
 

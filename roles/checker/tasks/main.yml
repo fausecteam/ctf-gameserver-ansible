@@ -15,7 +15,7 @@
     dest: /etc/sudoers.d/ctf-checker
     owner: root
     group: root
-    mode: 0600
+    mode: "0600"
 
 - name: "Add config for CTF Gameserver checkermaster"
   ansible.builtin.template:
@@ -23,6 +23,6 @@
     dest: /etc/ctf-gameserver/checkermaster.env
     owner: root
     group: root
-    mode: 0600
+    mode: "0600"
   notify:
     - Restart CTF Gameserver checkers

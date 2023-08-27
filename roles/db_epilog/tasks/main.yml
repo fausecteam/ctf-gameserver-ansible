@@ -80,8 +80,8 @@
 - name: "Set owner of scoreboard table"
   # The `quote` filter appears to use single quotes
   ansible.builtin.command: >
-    psql -c "ALTER TABLE scoring_scoreboard OWNER TO {{ ctf_gameserver_db_user_controller|quote }};"
-    {{ ctf_gameserver_db_name|quote }}
+    psql -c "ALTER TABLE scoring_scoreboard OWNER TO {{ ctf_gameserver_db_user_controller | quote }};"
+    {{ ctf_gameserver_db_name | quote }}
   run_once: true
   become: true
   become_user: postgres

@@ -16,7 +16,7 @@
     dest: /etc/ctf-gameserver/web/prod_settings.py
     owner: root
     group: "{{ ctf_gameserver_web_group }}"
-    mode: 0640
+    mode: "0640"
 
 - name: "Create CTF Gameserver web uploads directory"
   ansible.builtin.file:
@@ -24,7 +24,7 @@
     state: directory
     owner: root
     group: "{{ ctf_gameserver_web_group }}"
-    mode: 0770
+    mode: "0770"
 
 - name: "Create CTF Gameserver team downloads directory"
   ansible.builtin.file:
@@ -32,7 +32,7 @@
     state: directory
     owner: root
     group: "{{ ctf_gameserver_web_group }}"
-    mode: 0750
+    mode: "0750"
 
 - name: "Initialize Django auth in CTF Gameserver database"
   ansible.builtin.command: django-admin migrate auth

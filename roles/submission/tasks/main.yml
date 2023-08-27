@@ -10,7 +10,7 @@
     dest: /etc/ctf-gameserver/submission.env
     owner: root
     group: root
-    mode: 0600
+    mode: "0600"
   notify:
     - Restart CTF Gameserver submission
 
@@ -20,7 +20,7 @@
     dest: /etc/ctf-gameserver/submission-{{ item.1 }}.env
     owner: root
     group: root
-    mode: 0600
+    mode: "0600"
   vars:
     listen: "{{ ctf_gameserver_submission_listen_host }}:{{ item.1 }}"
     metrics_listen: "{{ ctf_gameserver_submission_metrics_listen_host }}:{{ ctf_gameserver_submission_metrics_listen_ports[item.0] }}"

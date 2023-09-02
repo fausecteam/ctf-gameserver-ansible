@@ -17,3 +17,5 @@ ctf_gameserver_vpnstatus_demo_ippattern: ""
 ctf_gameserver_vpnstatus_demo_serviceport: ""
 ctf_gameserver_vpnstatus_vulnbox_ippattern: ""
 ctf_gameserver_vpnstatus_vulnbox_serviceport: ""
+
+ctf_gameserver_vpnstatus_net_numbers_filter_file: ""

@@ -1,0 +1,5 @@
+releases:
+  1.0.0:
+    release_date: "2023-10-14"
+    changes:
+      release_summary: Initial public release

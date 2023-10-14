@@ -26,7 +26,7 @@ All roles expect be run as root user, either through direct root login or using 
 How To Use
 ----------
 ### Installation
-Either install the role through [Ansible Galaxy](http://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html) by running `ansible-galaxy collection install fausecteam.ctf_gameserver_ansible` or add this repository to your playbook's repository as a Git submodule.
+Either install the Collection through [Ansible Galaxy](http://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html) by running `ansible-galaxy collection install fausecteam.ctf_gameserver_ansible` or add this repository to your playbook's repository as a Git submodule.
 
 For the latter, e.g. place the submodule at "ansible\_collections/fausecteam/ctf\_gameserver\_ansible" and add the following to your "ansible.cfg":
 

@@ -94,3 +94,14 @@ Most of the variables have default values, but some do not and are therefore str
 License
 -------
 The contents of this repository are released under the ISC License.
+
+Internal Note: Releasing this Collection
+----------------------------------------
+As a maintainer of this Collection, perform the following steps to release it to Ansible Galaxy:
+
+1. Update `changelogs/changelog.yaml`
+2. Update `version` field in `galaxy.yml`
+3. Commit these changes
+4. Run `ansible-galaxy collection build`
+5. Run `ansible-galaxy collection publish <tarball>`
+6. Run `git tag -a -s <version>`

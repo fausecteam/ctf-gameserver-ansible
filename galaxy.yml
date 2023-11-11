@@ -9,7 +9,6 @@ authors:
 
 license:
   - ISC
-license_file: 'LICENSE.txt'
 
 readme: README.md
 repository: https://github.com/fausecteam/ctf-gameserver-ansible

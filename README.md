@@ -60,7 +60,7 @@ Most of the variables have default values, but some do not and are therefore str
     * `ctf_gameserver_db_pass_web`: See above
     * `ctf_gameserver_web_admin_email`: Email address of the admin user to be created (name is set
       through `ctf_gameserver_web_admin_user`, "admin" by default)
-    * `ctf_gameserver_web_admin_pass`: Email address of the admin user to be created
+    * `ctf_gameserver_web_admin_pass`: Password of the admin user to be created
     * `ctf_gameserver_web_from_email`: The sender address for emails sent by the web component
     * `ctf_gameserver_web_secret_key`: (Ideally) random string
     * `ctf_gameserver_web_https`: Defaults to `false`, change it if your website is available exclusively through HTTPS

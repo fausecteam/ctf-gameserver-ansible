@@ -15,7 +15,7 @@ What's Included
 
 Requirements
 ------------
-The installation is designed to run on Debian GNU/Linux with systemd. At the moment, version Debian 11 ("Bullseye") is our primary target. The Debian backports repository must be enabled. Ubuntu might work as well, but has not been tested.
+The installation is designed to run on Debian GNU/Linux with systemd. At the moment, version Debian 12 ("Bookworm") is our primary target. Ubuntu might work as well, but has not been tested.
 
 The roles do not have any notable requirements on recent Ansible features. They should work with any Ansible version that supports Collections, which is Ansible (or ansible-core) >= 2.9.
 

@@ -19,14 +19,14 @@ The installation is designed to run on Debian GNU/Linux with systemd. At the mom
 
 The roles do not have any notable requirements on recent Ansible features. They should work with any Ansible version that supports Collections, which is Ansible (or ansible-core) >= 2.9.
 
-It is expected that you build your own Debian packages for CTF Gameserver. These must be available under the base URL in the `ctf_gameserver_downloadpath` variable (see below).
+It is expected that you build your own Debian packages for CTF Gameserver as described [in the documentation](https://ctf-gameserver.org/installation/#package-build). These must be available under the base URL in the `ctf_gameserver_downloadpath` variable (see below).
 
 All roles expect be run as root user, either through direct root login or using Ansible's [privilege escalation facilities](https://docs.ansible.com/ansible/2.4/become.html). For the `ctf_gameserver_db_prolog` and `ctf_gameserver_db_epilog` roles, you have to make sure that `become`-ing an unprivileged user is possible as [described in the Ansible docs](https://docs.ansible.com/ansible/2.4/become.html#becoming-an-unprivileged-user). From our experience, the easiest option for that is [enabling ACL support](https://help.ubuntu.com/community/FilePermissionsACLs#Enabling_ACLs_in_the_Filesystem) for your file system.
 
 How To Use
 ----------
 ### Installation
-Either install the Collection through [Ansible Galaxy](http://docs.ansible.com/ansible/latest/reference_appendices/galaxy.html) by running `ansible-galaxy collection install fausecteam.ctf_gameserver_ansible` or add this repository to your playbook's repository as a Git submodule.
+Either install the Collection through [Ansible Galaxy](https://docs.ansible.com/ansible/2.9/cli/ansible-galaxy.html) by running `ansible-galaxy collection install fausecteam.ctf_gameserver_ansible` or add this repository to your playbook's repository as a Git submodule.
 
 For the latter, e.g. place the submodule at "ansible\_collections/fausecteam/ctf\_gameserver\_ansible" and add the following to your "ansible.cfg":
 
@@ -42,7 +42,7 @@ When using the roles in your own playbook, ordering is crucial. This is regardle
 4. `ctf_gameserver_controller`, `ctf_gameserver_submission`, `ctf_gameserver_checker`, and `ctf_gameserver_vpnstatus`: The ordering between these does not really matter.
 
 ### Variables
-The roles' behavior can be tuned with various Ansible variables. You can set these [wherever you set variables](https://docs.ansible.com/ansible/2.4/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable) for your playbook, for example at the group and host level or even in [Ansible Vault](http://docs.ansible.com/ansible/2.4/vault.html).
+The roles' behavior can be tuned with various Ansible variables. You can set these [wherever you set variables](https://docs.ansible.com/ansible/2.4/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable) for your playbook, for example at the group and host level or even in [Ansible Vault](https://docs.ansible.com/ansible/2.4/vault.html).
 
 Most of the variables have default values, but some do not and are therefore strictly required for you to set. The following is a list of variables which must be set or at least are commonly set. For a list of other options and their defaults, have a look at the "defaults/main.yml" files of the roles.
 

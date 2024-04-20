@@ -1,4 +1,8 @@
 releases:
+  1.1.0:
+    release_date: "2024-04-20"
+    changes:
+      release_summary: Resolve collisions in default metrics ports
   1.0.0:
     release_date: "2023-10-14"
     changes:

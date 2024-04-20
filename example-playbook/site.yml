@@ -1,0 +1,9 @@
+- hosts: ctf_gameserver_hosts
+  roles:
+    - fausecteam.ctf_gameserver_ansible.db_prolog
+    - fausecteam.ctf_gameserver_ansible.web
+    - fausecteam.ctf_gameserver_ansible.db_epilog
+    - fausecteam.ctf_gameserver_ansible.controller
+    - fausecteam.ctf_gameserver_ansible.submission
+    - fausecteam.ctf_gameserver_ansible.checker
+    - fausecteam.ctf_gameserver_ansible.vpnstatus

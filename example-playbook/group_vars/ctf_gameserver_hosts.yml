@@ -1,0 +1,12 @@
+# TODO: Uncomment and change
+#ctf_gameserver_downloadpath: https://example.org/
+#ctf_gameserver_db_pass_web: TODO
+#ctf_gameserver_db_pass_controller: TODO
+#ctf_gameserver_db_pass_submission: TODO
+#ctf_gameserver_db_pass_checker: TODO
+#ctf_gameserver_db_pass_vpnstatus: TODO
+#ctf_gameserver_web_admin_email: admin@example.org
+#ctf_gameserver_web_admin_pass: TODO
+#ctf_gameserver_web_from_email: sender@example.org
+#ctf_gameserver_web_secret_key: TODO
+#ctf_gameserver_flag_secret: TODO

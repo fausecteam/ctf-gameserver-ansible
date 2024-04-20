@@ -25,6 +25,8 @@ All roles expect be run as root user, either through direct root login or using 
 
 How To Use
 ----------
+A minimal example playbook is provided in this repo's "example-playbook" directory.
+
 ### Installation
 Either install the Collection through [Ansible Galaxy](https://docs.ansible.com/ansible/2.9/cli/ansible-galaxy.html) by running `ansible-galaxy collection install fausecteam.ctf_gameserver_ansible` or add this repository to your playbook's repository as a Git submodule.
 

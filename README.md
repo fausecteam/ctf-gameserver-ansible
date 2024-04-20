@@ -5,13 +5,13 @@ This repository contains a collection of Ansible roles to simplify setting up th
 
 What's Included
 ---------------
-* `ctf_gameserver_checker` performs a basic installation of the [Checker component](https://www.ctf-gameserver.org/checker.html) and configuration of the Checkermaster. You still have to add your own config to check individual services.
-* `ctf_gameserver_controller` installs and configures the [Controller component](https://www.ctf-gameserver.org/controller.html) including scoring.
-* `ctf_gameserver_db_prolog` installs PostgreSQL, creates the required databases, sets their permissions and prepares the main database for initialization through `ctf_gameserver_web`. No configuration of the PostgreSQL server is performed, so you probably still have to and fine-tune the settings in "postgresql.conf" and allow remote access in "pg\_hba.conf".
-* `ctf_gameserver_db_epilog` adjusts database permissions once the main database has been initialized through `ctf_gameserver_web`.
-* `ctf_gameserver_submission` performs installation and configuration of the [Submission component](https://www.ctf-gameserver.org/flags.html#submission).
-* `ctf_gameserver_vpnstatus` performs installation and configuration of the VPN Status Checker component.
-* `ctf_gameserver_web` installs and configures the [Web component](https://www.ctf-gameserver.org/web.html). It also intializes the main databse (using Django's facilities). Only the raw WSGI interface is provided, so you still have to set up a web and application server (like uwsgi) yourself.
+* `fausecteam.ctf_gameserver_ansible.checker` performs a basic installation of the [Checker component](https://www.ctf-gameserver.org/checker.html) and configuration of the Checkermaster. You still have to add your own config to check individual services.
+* `fausecteam.ctf_gameserver_ansible.controller` installs and configures the [Controller component](https://www.ctf-gameserver.org/controller.html) including scoring.
+* `fausecteam.ctf_gameserver_ansible.db_prolog` installs PostgreSQL, creates the required databases, sets their permissions and prepares the main database for initialization through the `web` role. No configuration of the PostgreSQL server is performed, so you probably still have to and fine-tune the settings in "postgresql.conf" and allow remote access in "pg\_hba.conf".
+* `fausecteam.ctf_gameserver_ansible.db_epilog` adjusts database permissions once the main database has been initialized through the `web` role.
+* `fausecteam.ctf_gameserver_ansible.submission` performs installation and configuration of the [Submission component](https://www.ctf-gameserver.org/flags.html#submission).
+* `fausecteam.ctf_gameserver_ansible.vpnstatus` performs installation and configuration of the VPN Status Checker component.
+* `fausecteam.ctf_gameserver_ansible.web` installs and configures the [Web component](https://www.ctf-gameserver.org/web.html). It also intializes the main databse (using Django's facilities). Only the raw WSGI interface is provided, so you still have to set up a web and application server (like uwsgi) yourself.
 
 Requirements
 ------------
@@ -21,7 +21,7 @@ The roles do not have any notable requirements on recent Ansible features. They 
 
 It is expected that you build your own Debian packages for CTF Gameserver as described [in the documentation](https://ctf-gameserver.org/installation/#package-build). These must be available under the base URL in the `ctf_gameserver_downloadpath` variable (see below).
 
-All roles expect be run as root user, either through direct root login or using Ansible's [privilege escalation facilities](https://docs.ansible.com/ansible/2.4/become.html). For the `ctf_gameserver_db_prolog` and `ctf_gameserver_db_epilog` roles, you have to make sure that `become`-ing an unprivileged user is possible as [described in the Ansible docs](https://docs.ansible.com/ansible/2.4/become.html#becoming-an-unprivileged-user). From our experience, the easiest option for that is [enabling ACL support](https://help.ubuntu.com/community/FilePermissionsACLs#Enabling_ACLs_in_the_Filesystem) for your file system.
+All roles expect be run as root user, either through direct root login or using Ansible's [privilege escalation facilities](https://docs.ansible.com/ansible/2.4/become.html). For the `db_prolog` and `db_epilog` roles, you have to make sure that `become`-ing an unprivileged user is possible as [described in the Ansible docs](https://docs.ansible.com/ansible/2.4/become.html#becoming-an-unprivileged-user). From our experience, the easiest option for that is [enabling ACL support](https://help.ubuntu.com/community/FilePermissionsACLs#Enabling_ACLs_in_the_Filesystem) for your file system.
 
 How To Use
 ----------
@@ -36,10 +36,10 @@ For the latter, e.g. place the submodule at "ansible\_collections/fausecteam/ctf
 ### Ordering
 When using the roles in your own playbook, ordering is crucial. This is regardless of whether the components should run on individual hosts or a shared one.
 
-1. `ctf_gameserver_db_prolog`: Must run before all other roles, as it creates their databases.
-2. `ctf_gameserver_web`: Initializes the main database, therefore it should be next.
-3. `ctf_gameserver_db_epilog`: Must run after `ctf_gameserver_web`.
-4. `ctf_gameserver_controller`, `ctf_gameserver_submission`, `ctf_gameserver_checker`, and `ctf_gameserver_vpnstatus`: The ordering between these does not really matter.
+1. `fausecteam.ctf_gameserver_ansible.db_prolog`: Must run before all other roles, as it creates their databases.
+2. `fausecteam.ctf_gameserver_ansible.web`: Initializes the main database, therefore it should be next.
+3. `fausecteam.ctf_gameserver_ansible.db_epilog`: Must run after `fausecteam.ctf_gameserver_ansible.web`.
+4. `fausecteam.ctf_gameserver_ansible.controller`, `fausecteam.ctf_gameserver_ansible.submission`, `fausecteam.ctf_gameserver_ansible.checker`, and `fausecteam.ctf_gameserver_ansible.vpnstatus`: The ordering between these does not really matter.
 
 ### Variables
 The roles' behavior can be tuned with various Ansible variables. You can set these [wherever you set variables](https://docs.ansible.com/ansible/2.4/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable) for your playbook, for example at the group and host level or even in [Ansible Vault](https://docs.ansible.com/ansible/2.4/vault.html).
@@ -50,13 +50,13 @@ Most of the variables have default values, but some do not and are therefore str
     * `ctf_gameserver_downloadpath`: The base URL under which your Debian packages for CTF Gameserver are available
     * `ctf_gameserver_db_host`: Defaults to "localhost", must at least be changed if the different components run on individual hosts
 
-* `ctf_gameserver_db_prolog`
+* `fausecteam.ctf_gameserver_ansible.db_prolog`
     * `ctf_gameserver_db_pass_web`: Password of the web component's database user (name is set through `ctf_gameserver_db_user_web`, "gameserver_web" by default)
     * `ctf_gameserver_db_pass_controller`: Password of the controller component's database user (name is set through `ctf_gameserver_db_user_controller`, "gameserver_controller" by default)
     * `ctf_gameserver_db_pass_submission`: Password of the submission component's database user (name is set through `ctf_gameserver_db_user_submission`, "gameserver_submission" by default)
     * `ctf_gameserver_db_pass_checker`: Password of the checker component's database user (name is set through `ctf_gameserver_db_user_checker`, "gameserver_checker" by default)
 
-* `ctf_gameserver_web`
+* `fausecteam.ctf_gameserver_ansible.web`
     * `ctf_gameserver_db_pass_web`: See above
     * `ctf_gameserver_web_admin_email`: Email address of the admin user to be created (name is set
       through `ctf_gameserver_web_admin_user`, "admin" by default)
@@ -68,21 +68,21 @@ Most of the variables have default values, but some do not and are therefore str
     * `ctf_gameserver_web_email_use_tls`: Defaults to `false`, change to use STARTTLS for talking to the mailserver
     * `ctf_gameserver_web_timezone`: Defaults to "UTC", change for a different competition timezone
 
-* `ctf_gameserver_controller`
+* `fausecteam.ctf_gameserver_ansible.controller`
     * `ctf_gameserver_db_pass_controller`: See above
     * `ctf_gameserver_checker_ippattern`: Defaults to "10.66.%d.2", adjust it if you use a different competition network
 
-* `ctf_gameserver_submission`
+* `fausecteam.ctf_gameserver_ansible.submission`
     * `ctf_gameserver_db_pass_submission`: See above
     * `ctf_gameserver_flag_secret`: Secret for the flags's HMAC, i.e. a random byte-string in Base-64 format
     * `ctf_gameserver_submission_listen_host`: Defaults to "localhost", must be changed to listen on another IP address or hostname
     * `ctf_gameserver_submission_listen_ports`: A list of ports to listen on, defaults to the single port 6666
 
-* `ctf_gameserver_checker`
+* `fausecteam.ctf_gameserver_ansible.checker`
     * `ctf_gameserver_db_pass_checker`: See above
     * `ctf_gameserver_flag_secret`: See above
 
-* `ctf_gameserver_vpnstatus`
+* `fausecteam.ctf_gameserver_ansible.vpnstatus`
     * `ctf_gameserver_db_pass_vpnstatus`: See above
     * `ctf_gameserver_vpnstatus_wireguard_ifpattern`: Optional, (old-style) Python formatstring for building a team's Wireguard interface, e.g. "wg%d"
     * `ctf_gameserver_vpnstatus_gateway_ippattern`: Optional, (old-style) Python formatstring for building a team's gateway IP, e.g. "10.66.%d.1"

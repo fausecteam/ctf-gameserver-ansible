@@ -16,4 +16,4 @@ ctf_gameserver_submission_team_regex: '^10\.66\.(\d+)\.\d+$'
 ctf_gameserver_submission_loglevel: INFO
 ctf_gameserver_submission_metrics_listen_host: "[::]"
 ctf_gameserver_submission_metrics_listen_ports:
-  - 9001
+  - 9005

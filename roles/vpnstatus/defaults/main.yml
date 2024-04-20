@@ -8,7 +8,7 @@ ctf_gameserver_vpnstatus_packages:
   - ctf-gameserver_{{ ctf_gameserver_version }}_all.deb
 
 ctf_gameserver_vpnstatus_loglevel: INFO
-ctf_gameserver_vpnstatus_metrics_listen: "[::]:9001"
+ctf_gameserver_vpnstatus_metrics_listen: "[::]:9002"
 
 ctf_gameserver_vpnstatus_wireguard_ifpattern: ""
 

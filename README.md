@@ -7,7 +7,7 @@ What's Included
 ---------------
 * `fausecteam.ctf_gameserver_ansible.checker` performs a basic installation of the [Checker component](https://www.ctf-gameserver.org/checker.html) and configuration of the Checkermaster. You still have to add your own config to check individual services.
 * `fausecteam.ctf_gameserver_ansible.controller` installs and configures the [Controller component](https://www.ctf-gameserver.org/controller.html) including scoring.
-* `fausecteam.ctf_gameserver_ansible.db_prolog` installs PostgreSQL, creates the required databases, sets their permissions and prepares the main database for initialization through the `web` role. No configuration of the PostgreSQL server is performed, so you probably still have to and fine-tune the settings in "postgresql.conf" and allow remote access in "pg\_hba.conf".
+* `fausecteam.ctf_gameserver_ansible.db_prolog` installs PostgreSQL, creates the required databases and users, and prepares the main database for initialization through the `web` role. No configuration of the PostgreSQL server is performed, so you probably still have to and fine-tune the settings in "postgresql.conf" and allow remote access in "pg\_hba.conf".
 * `fausecteam.ctf_gameserver_ansible.db_epilog` adjusts database permissions once the main database has been initialized through the `web` role.
 * `fausecteam.ctf_gameserver_ansible.submission` performs installation and configuration of the [Submission component](https://www.ctf-gameserver.org/flags.html#submission).
 * `fausecteam.ctf_gameserver_ansible.vpnstatus` performs installation and configuration of the VPN Status Checker component.
@@ -55,6 +55,7 @@ Most of the variables have default values, but some do not and are therefore str
     * `ctf_gameserver_db_pass_controller`: Password of the controller component's database user (name is set through `ctf_gameserver_db_user_controller`, "gameserver_controller" by default)
     * `ctf_gameserver_db_pass_submission`: Password of the submission component's database user (name is set through `ctf_gameserver_db_user_submission`, "gameserver_submission" by default)
     * `ctf_gameserver_db_pass_checker`: Password of the checker component's database user (name is set through `ctf_gameserver_db_user_checker`, "gameserver_checker" by default)
+    * `ctf_gameserver_db_pass_vpnstatus`: Passsword of the VPN Status component's database user (name ist set through `ctf_gameserver_db_user_vpnstatus`, "gameserver_vpnstatus" by default)
 
 * `fausecteam.ctf_gameserver_ansible.web`
     * `ctf_gameserver_db_pass_web`: See above

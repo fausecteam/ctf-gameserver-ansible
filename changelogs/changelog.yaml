@@ -1,4 +1,8 @@
 releases:
+  2.0.0:
+    release_date: "2024-07-20"
+    changes:
+      release_summary: Compatibility with new scoreboard calculation without Materialized View
   1.1.0:
     release_date: "2024-04-20"
     changes:

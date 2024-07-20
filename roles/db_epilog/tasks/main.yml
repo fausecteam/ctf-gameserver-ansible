@@ -3,26 +3,6 @@
     name: python3-psycopg2
     state: present
 
-- name: "Drop existing Table for scoring"
-  community.postgresql.postgresql_query:
-    db: "{{ ctf_gameserver_db_name }}"
-    query: "DROP TABLE IF EXISTS scoring_scoreboard;"
-    login_unix_socket: /run/postgresql
-  # This will fail if there exists something which is not a Table (i.e. Materialized View already exists)
-  ignore_errors: true
-  run_once: true
-  become: true
-  become_user: postgres
-
-- name: "Create Materialized View for scoring"
-  community.postgresql.postgresql_query:
-    db: "{{ ctf_gameserver_db_name }}"
-    query: "{{ lookup('file', 'files/scoring.sql') }}"
-    login_unix_socket: /run/postgresql
-  run_once: true
-  become: true
-  become_user: postgres
-
 - name: "Prevent web component database user from creating objects in the schema"
   community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
@@ -56,6 +36,8 @@
       privs: SELECT,INSERT,UPDATE
     - table: scoring_gamecontrol
       privs: SELECT,INSERT,UPDATE
+    - table: scoring_scoreboard
+      privs: SELECT,INSERT,UPDATE,DELETE
     - table: scoring_service
       privs: SELECT
     - table: scoring_statuscheck
@@ -71,29 +53,6 @@
     objs: scoring_flag_id_seq
     roles: "{{ ctf_gameserver_db_user_controller }}"
     privs: SELECT,UPDATE
-    state: present
-    login_unix_socket: /run/postgresql
-  run_once: true
-  become: true
-  become_user: postgres
-
-- name: "Set owner of scoreboard table"
-  # The `quote` filter appears to use single quotes
-  ansible.builtin.command: >
-    psql -c "ALTER TABLE scoring_scoreboard OWNER TO {{ ctf_gameserver_db_user_controller | quote }};"
-    {{ ctf_gameserver_db_name | quote }}
-  run_once: true
-  become: true
-  become_user: postgres
-
-# Other permissions are available through ownership
-- name: "Grant web component database user permission on scoreboard table"
-  community.postgresql.postgresql_privs:
-    database: "{{ ctf_gameserver_db_name }}"
-    type: table
-    objs: scoring_scoreboard
-    roles: "{{ ctf_gameserver_db_user_web }}"
-    privs: SELECT
     state: present
     login_unix_socket: /run/postgresql
   run_once: true

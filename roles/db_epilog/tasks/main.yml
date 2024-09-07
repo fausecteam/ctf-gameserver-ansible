@@ -46,15 +46,20 @@
   become: true
   become_user: postgres
 
-- name: "Grant controller component database user permission on flag ID sequence"
-  community.postgresql.postgresql_privs:
+- name: "Grant controller component database user necessary sequence permissions"
+  postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: sequence
-    objs: scoring_flag_id_seq
+    objs: "{{ item.seq }}"
     roles: "{{ ctf_gameserver_db_user_controller }}"
-    privs: SELECT,UPDATE
+    privs: "{{ item.privs }}"
     state: present
     login_unix_socket: /run/postgresql
+  with_items:
+    - seq: scoring_flag_id_seq
+      privs: SELECT,UPDATE
+    - seq: scoring_scoreboard_id_seq
+      privs: SELECT,UPDATE
   run_once: true
   become: true
   become_user: postgres

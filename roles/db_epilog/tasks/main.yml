@@ -94,15 +94,15 @@
   community.postgresql.postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: sequence
-    objs: "{{ item.table }}"
+    objs: "{{ item.seq }}"
     roles: "{{ ctf_gameserver_db_user_checker }}"
     privs: "{{ item.privs }}"
     state: present
     login_unix_socket: /run/postgresql
   with_items:
-    - table: scoring_statuscheck_id_seq
+    - seq: scoring_statuscheck_id_seq
       privs: SELECT,UPDATE
-    - table: scoring_checkerstate_id_seq
+    - seq: scoring_checkerstate_id_seq
       privs: SELECT,UPDATE
   run_once: true
   become: true
@@ -167,13 +167,13 @@
   postgresql_privs:
     database: "{{ ctf_gameserver_db_name }}"
     type: sequence
-    objs: "{{ item.table }}"
+    objs: "{{ item.seq }}"
     roles: "{{ ctf_gameserver_db_user_vpnstatus }}"
     privs: "{{ item.privs }}"
     state: present
     login_unix_socket: /run/postgresql
   with_items:
-    - table: vpnstatus_vpnstatuscheck_id_seq
+    - seq: vpnstatus_vpnstatuscheck_id_seq
       privs: SELECT,UPDATE
   run_once: true
   become: true

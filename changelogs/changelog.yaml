@@ -1,4 +1,8 @@
 releases:
+  2.0.1:
+    release_date: "2024-09-07"
+    changes:
+      release_summary: Give missing database grant to controller user
   2.0.0:
     release_date: "2024-07-20"
     changes:

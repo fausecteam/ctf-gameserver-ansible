@@ -1,7 +1,7 @@
 namespace: fausecteam
 name: ctf_gameserver_ansible
 description: Roles to simplify setting up the different components of FAUST's CTF Gameserver
-version: 2.0.0
+version: 2.0.1
 
 authors:
   - FAUST -- FAU Security Team

@@ -1,0 +1,9 @@
+systemd_services:
+  - unit: gunicorn-web.service
+    template: gunicorn-web.service.j2
+  - unit: controller.service
+    template: controller.service.j2
+  - unit: submission.service
+    template: submission.service.j2
+  - unit: checkermaster@service1.service
+    template: checkermaster@.service.j2

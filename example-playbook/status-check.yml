@@ -1,0 +1,28 @@
+- name: Check status of CTF Gameserver services
+  hosts: ctf_gameserver_hosts
+  become: yes
+  tasks:
+    - name: Check service status
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      with_items:
+        - gunicorn-web
+        - controller
+        - checkermaster
+        - submission
+
+    - name: Show service status (journalctl preview)
+      ansible.builtin.shell: "systemctl status {{ item }} --no-pager"
+      register: service_status
+      with_items:
+        - gunicorn-web
+        - controller
+        - checkermaster
+        - submission
+
+    - name: Display output
+      ansible.builtin.debug:
+        msg: "{{ item.stdout_lines }}"
+      with_items: "{{ service_status.results }}"

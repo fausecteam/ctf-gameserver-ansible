@@ -10,3 +10,27 @@
 #ctf_gameserver_web_from_email: sender@example.org
 #ctf_gameserver_web_secret_key: TODO
 #ctf_gameserver_flag_secret: TODO
+ctf_gameserver_web_django_environment:
+  PYTHONPATH: "/usr/lib/python3/dist-packages"
+  DJANGO_SETTINGS_MODULE: "ctf_gameserver.web.prod_settings"
+
+ctf_gameserver_downloadpath: "/root/ctf-gameserver"
+ctf_gameserver_web_packages:
+  - "ctf-gameserver_1.0_all.deb"
+ctf_gameserver_db_host: "localhost"
+
+ctf_gameserver_db_pass_web: "pass_web"
+ctf_gameserver_db_pass_controller: "pass_controller"
+ctf_gameserver_db_pass_submission: "pass_submission"
+ctf_gameserver_db_pass_checker: "pass_checker"
+ctf_gameserver_db_pass_vpnstatus: "pass_vpnstatus"
+
+ctf_gameserver_web_admin_email: "admin@ctf.local"
+ctf_gameserver_web_admin_pass: "SuperSecureAdminPass"
+ctf_gameserver_web_from_email: "noreply@ctf.local"
+ctf_gameserver_web_secret_key: "change_this_to_a_long_random_string"
+ctf_gameserver_web_timezone: "Africa/Douala"
+
+ctf_gameserver_flag_secret: "base64:ThisIsARandomFlagSecret123=="
+ctf_gameserver_submission_listen_ports:
+  - 6666

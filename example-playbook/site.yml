@@ -7,3 +7,4 @@
     - fausecteam.ctf_gameserver_ansible.submission
     - fausecteam.ctf_gameserver_ansible.checker
     - fausecteam.ctf_gameserver_ansible.vpnstatus
+    - role: services

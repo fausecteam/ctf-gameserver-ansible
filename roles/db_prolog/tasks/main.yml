@@ -19,7 +19,7 @@
 
 - name: "Revoke privileges for PUBLIC from the database"
   community.postgresql.postgresql_privs:
-    database: "{{ ctf_gameserver_db_name }}"
+    login_db: "{{ ctf_gameserver_db_name }}"
     type: database
     roles: PUBLIC
     privs: ALL
@@ -33,7 +33,7 @@
 # https://stackoverflow.com/a/25586847
 - name: "Revoke privileges for PUBLIC from the database schemas"
   community.postgresql.postgresql_privs:
-    database: "{{ ctf_gameserver_db_name }}"
+    login_db: "{{ ctf_gameserver_db_name }}"
     type: schema
     objs: public
     roles: PUBLIC
@@ -70,7 +70,7 @@
 
 - name: "Allow database users to connect to the Gameserver database"
   community.postgresql.postgresql_privs:
-    database: "{{ ctf_gameserver_db_name }}"
+    login_db: "{{ ctf_gameserver_db_name }}"
     type: database
     roles: "{{ item }}"
     privs: CONNECT
@@ -88,7 +88,7 @@
 
 - name: "Allow database users to use the Gameserver database schema"
   community.postgresql.postgresql_privs:
-    database: "{{ ctf_gameserver_db_name }}"
+    login_db: "{{ ctf_gameserver_db_name }}"
     type: schema
     objs: public
     roles: "{{ item }}"
@@ -107,7 +107,7 @@
 
 - name: "(Temporarily) allow web component database user to create objects in the schema"
   community.postgresql.postgresql_privs:
-    database: "{{ ctf_gameserver_db_name }}"
+    login_db: "{{ ctf_gameserver_db_name }}"
     type: schema
     objs: public
     roles: "{{ ctf_gameserver_db_user_web }}"

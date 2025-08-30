@@ -30,10 +30,7 @@ A minimal example playbook is provided in this repo's "example-playbook" directo
 ### Installation
 Either install the Collection through [Ansible Galaxy](https://docs.ansible.com/ansible/2.9/cli/ansible-galaxy.html) by running `ansible-galaxy collection install fausecteam.ctf_gameserver_ansible` or add this repository to your playbook's repository as a Git submodule.
 
-For the latter, e.g. place the submodule at "ansible\_collections/fausecteam/ctf\_gameserver\_ansible" and add the following to your "ansible.cfg":
-
-    [defaults]
-    collections_paths = .:~/.ansible/collections:/usr/share/ansible/collections
+For the latter, place the submodule at "collections/ansible\_collections/fausecteam/ctf\_gameserver\_ansible".
 
 ### Ordering
 When using the roles in your own playbook, ordering is crucial. This is regardless of whether the components should run on individual hosts or a shared one.

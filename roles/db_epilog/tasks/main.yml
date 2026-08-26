@@ -32,6 +32,8 @@
       privs: SELECT
     - table: scoring_capture
       privs: SELECT
+    - table: scoring_checkertask
+      privs: SELECT,INSERT,UPDATE
     - table: scoring_flag
       privs: SELECT,INSERT,UPDATE
     - table: scoring_gamecontrol
@@ -77,6 +79,8 @@
     - table: registration_team
       privs: SELECT
     - table: scoring_checkerstate
+      privs: SELECT,INSERT,UPDATE
+    - table: scoring_checkertask
       privs: SELECT,INSERT,UPDATE
     - table: scoring_flag
       privs: SELECT,UPDATE

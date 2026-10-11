@@ -1,7 +1,8 @@
-- name: "Install Django"
+- name: "Install Django from Debian backports"
   ansible.builtin.apt:
     state: present
     name: python3-django
+    default_release: trixie-backports
 
 - name: "Install CTF Gameserver web component"
   ansible.builtin.apt:

@@ -1,4 +1,8 @@
 releases:
+  2.2.0:
+    release_date: "2026-10-11"
+    changes:
+      release_summary: Install Django from Debian backports
   2.1.0:
     release_date: "2026-08-29"
     changes:
